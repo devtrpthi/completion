@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  express-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://mongodb:27018/express-auth
+      JWT_SECRET: secretKey
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb-data:/data/db
+volumes:
+  mongodb-data:
